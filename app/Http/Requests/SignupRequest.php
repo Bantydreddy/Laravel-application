@@ -30,7 +30,7 @@ class SignupRequest extends FormRequest
                 'required',
                 'confirmed', // the request must also send password_confirmation
                 Password::min(8)
-                    ->letters()                                                                                                                                                                                                                                          
+                    ->letters()
                     ->symbols(),
             ],
         ];

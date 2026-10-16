@@ -8,6 +8,7 @@ use App\Http\Requests\SignupRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -31,7 +32,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (!Auth::attempt($credentials)) {
+        if (! Auth::attempt($credentials)) {
             return response([
                 'message' => 'Provided email address or password is incorrect',
             ], 422);
@@ -48,11 +49,11 @@ class AuthController extends Controller
     {
         /** @var User $user */
         $user = $request->user();
-        $token= $user ->currentAccessToken();
-        if ($token instanceof \Laravel\Sanctum\PersonalAccessToken) {
-        $token->delete();
+        $token = $user->currentAccessToken();
+        if ($token instanceof PersonalAccessToken) {
+            $token->delete();
         }
-        
+
         return response('', 204);
     }
 }
