@@ -1,17 +1,15 @@
-
 /*eslint-disable no-unused-vars*/
-import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
-import { useStateContext } from '../contexts/ContextProvider'
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useStateContext } from '../contexts/ContextProvider';
 
 export default function GuestLayout() {
-    const { token } = useStateContext()
+    const { token } = useStateContext();
 
     if (token) {
-        return <Navigate to="/" />
+        return <Navigate to="/" />;
     }
     return (
-
         /* u can do this here instead of in the login and signup pages
         <div className="login-signup-form animated fadeInDown">
             <div className="form">
@@ -23,5 +21,5 @@ export default function GuestLayout() {
         <div>
             <Outlet />
         </div>
-    )
+    );
 }
